@@ -8,12 +8,35 @@ References:
 Create resource group
 
 ```
-az group create --name myResourceGroup --location eastus
+az group create --name test-aks --location westeurope
 ```
 
 Check privileges of your account
 
-```bash
+```
 az provider show -n Microsoft.OperationsManagement -o table
 az provider show -n Microsoft.OperationalInsights -o table
+```
+
+They are not granted by default you need to grant them
+
+```
+az provider register --namespace Microsoft.OperationsManagement
+az provider register --namespace Microsoft.OperationalInsights
+```
+
+Create the cluster
+
+```
+az aks create --resource-group test-aks --name aks-clu --node-count 1 --enable-addons monitoring --generate-ssh-keys
+```
+Retrieve credentials for kubectl
+
+```
+az aks get-credentials --resource-group test-aks --name aks-clu
+```
+Delete ypur tests
+
+```
+az group delete --name test-aks --yes --no-wait
 ```
