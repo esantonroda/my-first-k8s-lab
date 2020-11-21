@@ -35,8 +35,11 @@ Retrieve credentials for kubectl
 ```
 az aks get-credentials --resource-group test-aks --name aks-clu
 ```
-Delete ypur tests
-
+Scale nodes to zero
+```
+az aks scale --resource-group test-aks --name aks-clu --node-count 0 --nodepool-name agentpool
+```
+Delete your tests
 ```
 az group delete --name test-aks --yes --no-wait
 ```
