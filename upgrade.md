@@ -1,5 +1,7 @@
 # upgrade.md
 
+* [Upgrade an Azure Kubernetes Service (AKS) cluster](https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster)
+
 Check possible upgrade and perform it
 
 ```bash
