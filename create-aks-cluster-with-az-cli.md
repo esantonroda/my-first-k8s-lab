@@ -140,7 +140,7 @@ az aks create --name myAKSCluster \
               --enable-cluster-autoscaler \
               --min-count 1 \
               --max-count 3 \
-              --kubernetes-version 1.17.13 \
+              --kubernetes-version 1.18.14 \
               --output table
 
 ## with autoscale
@@ -176,7 +176,7 @@ A different object named myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
 A different object named clusterAdmin_test-aks_myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
-Merged "myAKSCluster-admin" as current context in /home/esantonroda/.kube/config
+Merged "myAKSCluster-admin" as current context in /home/dataniard/.kube/config
 
 ```
 ❯ kubectl get nodes -o wide -ALL
