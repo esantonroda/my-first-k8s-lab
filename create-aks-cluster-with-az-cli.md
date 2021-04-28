@@ -123,14 +123,14 @@ az aks create --name <CLUSTER-NAME> \
 ❯ az aks get-versions --location westeurope -o table
 The behavior of this command has been altered by the following extension: aks-preview
 KubernetesVersion    Upgrades
--------------------  -------------------------
-1.20.2(preview)      None available
-1.19.7               1.20.2(preview)
-1.19.6               1.19.7, 1.20.2(preview)
-1.18.14              1.19.6, 1.19.7
-1.18.10              1.18.14, 1.19.6, 1.19.7
-1.17.16              1.18.10, 1.18.14
-1.17.13              1.17.16, 1.18.10, 1.18.14
+-------------------  -----------------------
+1.20.5               None available
+1.20.2               1.20.5
+1.19.9               1.20.2, 1.20.5
+1.19.7               1.19.9, 1.20.2, 1.20.5
+1.18.17              1.19.7, 1.19.9
+1.18.14              1.18.17, 1.19.7, 1.19.9
+
 
 az aks create --name myAKSCluster \
               --resource-group test-aks \
