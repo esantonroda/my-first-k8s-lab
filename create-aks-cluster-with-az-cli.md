@@ -134,7 +134,7 @@ az aks create --name <CLUSTER-NAME> \
 
 ```
 
-Para generar el cluster en un solo comando.
+Para generar el cluster en un solo comando, 
 
 ```bash
 
@@ -269,7 +269,7 @@ DnsPrefix                   EnablePodSecurityPolicy    EnableRbac    Fqdn       
 myAKSClust-test-aks-266215  False                      True          myaksclust-test-aks-266215-2276faf4.hcp.westeurope.azmk8s.io  1.19.6               westeurope  10               myAKSCluster  MC_test-aks_myAKSCluster_westeurope  Succeeded            test-aks
 ```
 
-During the upgrade we can check the effects on the cluster.
+During the upgrade we can check the effects on the cluster
 
 ```bash
 ❯ kubectl get no,po -ALL -o wide
