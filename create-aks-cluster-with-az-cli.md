@@ -134,7 +134,7 @@ az aks create --name <CLUSTER-NAME> \
 
 ```
 
-Para generar el cluster en un solo comando, 
+Para generar el cluster en un solo comando
 
 ```bash
 
