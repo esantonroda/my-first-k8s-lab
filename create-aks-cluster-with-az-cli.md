@@ -141,14 +141,14 @@ Para generar el cluster en un solo comando.
 ❯ az aks get-versions --location westeurope -o table
 The behavior of this command has been altered by the following extension: aks-preview
 KubernetesVersion    Upgrades
--------------------  -------------------------
-1.20.2(preview)      None available
-1.19.7               1.20.2(preview)
-1.19.6               1.19.7, 1.20.2(preview)
-1.18.14              1.19.6, 1.19.7
-1.18.10              1.18.14, 1.19.6, 1.19.7
-1.17.16              1.18.10, 1.18.14
-1.17.13              1.17.16, 1.18.10, 1.18.14
+-------------------  -----------------------
+1.20.5               None available
+1.20.2               1.20.5
+1.19.9               1.20.2, 1.20.5
+1.19.7               1.19.9, 1.20.2, 1.20.5
+1.18.17              1.19.7, 1.19.9
+1.18.14              1.18.17, 1.19.7, 1.19.9
+
 
 az aks create --name myAKSCluster \
               --resource-group test-aks \
@@ -158,7 +158,7 @@ az aks create --name myAKSCluster \
               --enable-cluster-autoscaler \
               --min-count 1 \
               --max-count 3 \
-              --kubernetes-version 1.17.13 \
+              --kubernetes-version 1.18.14 \
               --output table
 
 ## with autoscale
@@ -193,7 +193,12 @@ A different object named myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
 A different object named clusterAdmin_test-aks_myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
+<<<<<<< HEAD
 Merged "myAKSCluster-admin" as current context in /home/esantonroda/.kube/config
+=======
+Merged "myAKSCluster-admin" as current context in /home/dataniard/.kube/config
+
+>>>>>>> c3169dfd0df4ddb58ea263d3c6552e7de97a53f2
 ```
 
 ```bash
