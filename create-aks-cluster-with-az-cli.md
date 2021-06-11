@@ -193,12 +193,7 @@ A different object named myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
 A different object named clusterAdmin_test-aks_myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
-<<<<<<< HEAD
 Merged "myAKSCluster-admin" as current context in /home/esantonroda/.kube/config
-=======
-Merged "myAKSCluster-admin" as current context in /home/dataniard/.kube/config
-
->>>>>>> c3169dfd0df4ddb58ea263d3c6552e7de97a53f2
 ```
 
 ```bash
