@@ -1,13 +1,23 @@
 # create-aks-cluster-with-az-cli
 
-## References:
+- Indice
+  - [References](#references)
+  - [Create resource group](#create-resource-group)
+  - [Check privileges of your account](#check-privileges-of-your-account)
+  - [Create the cluster](#create-the-cluster)
+  - [Retrieve credentials for kubectl](#retrieve-credentials-for-kubectl)
+  - [Stop/start the cluster (aks-preview)](#stop-start-the-cluster--aks-preview-)
+  - [Delete your tests](#delete-your-tests)
+  - [Upgrading the cluster](#upgrading-the-cluster)
 
-* [Quickstart: Deploy an Azure Kubernetes Service cluster using the Azure CLI](https://docs.microsoft.com/es-es/azure/aks/kubernetes-walkthrough?source=docs)
-* [Kubernetes on Microsoft Azure Kubernetes Service (AKS) with Autoscaling](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/microsoft/step-zero-azure-autoscale.html)
+## References
+
+- [Quickstart: Deploy an Azure Kubernetes Service cluster using the Azure CLI](https://docs.microsoft.com/es-es/azure/aks/kubernetes-walkthrough?source=docs)
+- [Kubernetes on Microsoft Azure Kubernetes Service (AKS) with Autoscaling](https://zero-to-jupyterhub.readthedocs.io/en/latest/kubernetes/microsoft/step-zero-azure-autoscale.html)
 
 ## Create resource group
 
-```
+```bash
 az group create \
               --name=<RESOURCE-GROUP-NAME> \
               --location=<LOCATION> \
@@ -20,7 +30,7 @@ az group create \
 
 ```
 
-Testing
+Testing it
 
 ```bash
 ❯ az group create \
@@ -34,7 +44,7 @@ westeurope  test-aks
 
 ## Check privileges of your account
 
-```
+```bash
 az provider show -n Microsoft.OperationsManagement -o table
 az provider show -n Microsoft.OperationalInsights -o table
 ```
@@ -52,12 +62,14 @@ Microsoft.OperationalInsights  RegistrationRequired  Registered
 
 They are not granted by default, you need to grant them
 
-```
+```bash
 az provider register --namespace Microsoft.OperationsManagement
 az provider register --namespace Microsoft.OperationalInsights
 ```
 
 ## Create the cluster
+
+Diferentes versiones y opciones
 
 ```bash
 -- one node
@@ -120,6 +132,12 @@ az aks create --name <CLUSTER-NAME> \
               --vnet-subnet-id $SUBNET_ID \
               --output table
 
+```
+
+Para generar el cluster en un solo comando.
+
+```bash
+
 ❯ az aks get-versions --location westeurope -o table
 The behavior of this command has been altered by the following extension: aks-preview
 KubernetesVersion    Upgrades
@@ -161,12 +179,11 @@ DnsPrefix                   EnablePodSecurityPolicy    EnableRbac    Fqdn       
 --------------------------  -------------------------  ------------  ------------------------------------------------------------  -------------------  ----------  ---------------  ------------  -----------------------------------  -------------------  ---------------
 myAKSClust-test-aks-266215  False                      True          myaksclust-test-aks-266215-2276faf4.hcp.westeurope.azmk8s.io  1.17.13              westeurope  10               myAKSCluster  MC_test-aks_myAKSCluster_westeurope  Succeeded            test-aks
 
-
-
 ```
+
 ## Retrieve credentials for kubectl
 
-```
+```bash
 az aks get-credentials --resource-group test-aks --name myAKSCluster
 az aks get-credentials --resource-group test-aks --name myAKSCluster --admin
 
@@ -177,23 +194,28 @@ Overwrite? (y/n): y
 A different object named clusterAdmin_test-aks_myAKSCluster already exists in your kubeconfig file.
 Overwrite? (y/n): y
 Merged "myAKSCluster-admin" as current context in /home/esantonroda/.kube/config
-
 ```
+
+```bash
 ❯ kubectl get nodes -o wide -ALL
 NAME                                STATUS   ROLES   AGE     VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME   L
 aks-nodepool1-19768975-vmss000000   Ready    agent   3m3s    v1.17.13   10.240.0.4    <none>        Ubuntu 16.04.7 LTS   4.15.0-1106-azure   docker://19.3.14
 aks-nodepool1-19768975-vmss000001   Ready    agent   3m19s   v1.17.13   10.240.0.5    <none>        Ubuntu 16.04.7 LTS   4.15.0-1106-azure   docker://19.3.14
-
-Scale nodes to zero
 ```
+
+Scale nodes to zero, en desuso, ya no se puede hacer.
+
+```bash
 az aks scale --resource-group test-aks --name myAKSCluster --node-count 0 --nodepool-name nodepool1
 
 ❯ az aks scale --resource-group test-aks --name myAKSCluster --node-count 0 --nodepool-name nodepool1
 The behavior of this command has been altered by the following extension: aks-preview
 Cannot scale cluster autoscaler enabled node pool.
 ```
+
 ## Stop/start the cluster (aks-preview)
-```
+
+```bash
 az aks stop --name myAKSCluster --resource-group test-aks
 
 ## Elapsed time (2m 46s)
@@ -207,15 +229,18 @@ az aks start --name myAKSCluster --resource-group test-aks
 The behavior of this command has been altered by the following extension: aks-preview
 
 ```
+
 ## Delete your tests
-```
+
+```bash
 az group delete --name test-aks --yes --no-wait
 ```
 
 ## Upgrading the cluster
-First check 
 
-```
+First check
+
+```bash
 ❯ az aks get-upgrades --name myAKSCluster --resource-group test-aks -o table
 The behavior of this command has been altered by the following extension: aks-preview
 Name     ResourceGroup    MasterVersion    Upgrades
@@ -229,9 +254,9 @@ Name       OsType    VmSize           Count    MaxPods    ProvisioningState    M
 nodepool1  Linux     Standard_D2s_v3  1        110        Succeeded            System
 ```
 
-Starting the upgrade
+### Starting the upgrade
 
-```
+```bash
 az aks upgrade  --resource-group test-aks --name myAKSCluster --kubernetes-version 1.18.14 -o table
 
 ❯ az aks upgrade  --resource-group test-aks --name myAKSCluster --kubernetes-version 1.19.6 -o table
@@ -246,7 +271,7 @@ myAKSClust-test-aks-266215  False                      True          myaksclust-
 
 During the upgrade we can check the effects on the cluster.
 
-```
+```bash
 ❯ kubectl get no,po -ALL -o wide
 NAME                                     STATUS                     ROLES   AGE    VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME          L
 node/aks-nodepool1-19768975-vmss000002   Ready,SchedulingDisabled   agent   22m    v1.18.14   10.240.0.4    <none>        Ubuntu 18.04.5 LTS   5.4.0-1039-azure   docker://19.3.14
@@ -280,4 +305,3 @@ kube-system   pod/kubernetes-dashboard-56dbcd8bf5-lcslb       1/1     Running   
 kube-system   pod/metrics-server-7f5b4f6d8c-4sd4z             1/1     Running   0          46s     10.244.0.2   aks-nodepool1-19768975-vmss000002   <none>           <none>
 kube-system   pod/tunnelfront-766fbb7fc6-2xhbt                1/1     Running   0          46s     10.244.0.3   aks-nodepool1-19768975-vmss000002   <none>           <none>
 ```
-
