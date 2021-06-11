@@ -1,25 +1,34 @@
 # kube-tools
 
-## References
-
-* [Install and Set Up kubectl](https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-kubectl/)
-* [kube-ps1: Kubernetes prompt for bash and zsh](https://github.com/jonmosco/kube-ps1)
-
 ## install kubectl in ubuntu
 
-```bash
-sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update
-sudo apt-get install -y kubectl
-```
+- [Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 
 ## kube-ps1
 
-for bash shell, clone the repo and source kube-ps1.sh from .bashrc
+for bash shell, clone the [repo](https://github.com/jonmosco/kube-ps1) and source kube-ps1.sh from .bashrc
 
 ```bash
 source /path/to/kube-ps1.sh
 PS1='[\u@\h \W $(kube_ps1)]\$ '
 ```
+
+## use my dotfiles
+
+If you want to use zsh, you can use my [dotfiles](https://github.com/esantonroda/dotfiles), based on:
+
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+- kubectl+kubens+kubectx
+- completion, syntax-highligthing and autosuggestions
+- config adapted to aws, azure, k8s ...
+- works on several distros, even web consoles
+- Maybe won't be perfect but it's mine
+
+## References
+
+- [Install and Set Up kubectl](https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [kube-ps1: Kubernetes prompt for bash and zsh](https://github.com/jonmosco/kube-ps1)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+- [kube-ps1: Kubernetes prompt for bash and zsh](https://github.com/jonmosco/kube-ps1)
